@@ -5,6 +5,7 @@ Jika saya melakukan kecurangan dalam pengerjaan tugas ini,
 maka saya siap menerima sanksi atau hukuman dari dosen mata kuliah 
 dan Tuhan/Allah SWT.
 */
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
