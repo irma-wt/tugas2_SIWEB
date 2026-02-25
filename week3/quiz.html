@@ -1,0 +1,47 @@
+<!--
+Saya mengerjakan tugas ini sendiri tanpa melakukan kecurangan seperti menggunakan atau menduplikasi kode program yang ada.
+Jika saya melakukan kecurangan dalam pengerjaan tugas ini, maka saya siap menerima sanksi atau hukuman dari dosen mata kuliah dan Tuhan/Allah SWT.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        button {
+            padding: 4px 10px;
+            cursor: pointer;
+        }
+        p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="handleClick()">Click me!</button>
+
+    <div id="message"></div>
+    <p>Click the button to see the counter increase.</p>
+    <p>Close the browser tab (or window), and try again, and the counter is reset.</p>
+
+    <script>
+        var count = parseInt(localStorage.getItem('clickCount')) || 0;
+
+        if (count > 0) {
+            document.getElementById('message').innerHTML =
+                '<p>You have clicked the button ' + count + ' time(s) in this session.</p>';
+        }
+
+        function handleClick() {
+            count++;
+            localStorage.setItem('clickCount', count);
+            document.getElementById('message').innerHTML =
+                '<p>You have clicked the button ' + count + ' time(s) in this session.</p>';
+        }
+    </script>
+</body>
+</html>
