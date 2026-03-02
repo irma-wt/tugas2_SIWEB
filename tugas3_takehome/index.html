@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Preferensi Warna</title>
+
+  <!-- ===== CSS INTERNAL ===== -->
+  <style>
+    /* === Reset dasar === */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* === Body: default background biru, teks merah === */
+    body {
+      background-color: #3a6bbf;
+      color: #cc0000;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+
+    /* === Kartu utama === */
+    .card {
+      background-color: #3a6bbf;
+      border-radius: 8px;
+      padding: 28px 32px;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    /* === Judul === */
+    .card h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: inherit;
+    }
+
+    /* === Fieldset: border abu-abu tetap, tidak ikut warna teks === */
+    fieldset {
+      border: 1px solid #aaa;
+      border-radius: 4px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      background-color: transparent;
+    }
+
+    legend {
+      padding: 0 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #cc0000; /* warna merah seperti contoh, bisa diubah jika perlu */
+    }
+
+    /* === Baris item warna === */
+    .color-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .color-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .color-item label {
+      flex: 1;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: inherit;
+    }
+
+    /* === Kotak warna (swatch) yang bisa diklik === */
+.color-swatch {
+  width: 44px;
+  height: 22px;
+  border: 3px solid #ffffff;
+  cursor: pointer;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px #aaa;
+}
+
+    /* === Tombol Simpan: style button biasa abu-abu === */
+    #btnSimpan {
+      display: inline-block;
+      padding: 5px 14px;
+      font-size: 0.85rem;
+      font-weight: 400;
+      border: 1px solid #888;
+      border-radius: 3px;
+      background-color: #e0e0e0;
+      color: #000;
+      cursor: pointer;
+    }
+
+    #btnSimpan:hover {
+      background-color: #cacaca;
+    }
+
+    /* === Modal Color Picker === */
+    #colorModal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #f5f5f5;
+      border: 1px solid #bbb;
+      border-radius: 4px;
+      width: 260px;
+      padding: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+
+    #colorModal.active {
+      display: block;
+    }
+
+    /* Header modal */
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 10px;
+      background: #e8e8e8;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .modal-header span {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #333;
+    }
+
+    /* Tombol Cancel dan Select di header */
+    .btn-cancel {
+      padding: 3px 10px;
+      font-size: 0.8rem;
+      background: #d0d0d0;
+      border: 1px solid #aaa;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .btn-select {
+      padding: 3px 10px;
+      font-size: 0.8rem;
+      background: #2ecc71;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .btn-select:hover { background: #27ae60; }
+    .btn-cancel:hover { background: #bbb; }
+
+    /* Grid palet warna */
+    .palette {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 3px;
+      padding: 10px;
+    }
+
+    .palette-color {
+      width: 26px;
+      height: 26px;
+      border-radius: 2px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      position: relative;
+    }
+
+    .palette-color:hover {
+      border-color: #333;
+    }
+
+    .palette-color.selected::after {
+      content: '✓';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 14px;
+      color: #fff;
+      text-shadow: 0 0 2px #000;
+      font-weight: bold;
+    }
+
+    /* Bagian Custom (input hex) */
+    .custom-section {
+      padding: 6px 10px 10px;
+      border-top: 1px solid #ddd;
+    }
+
+    .custom-section label {
+      font-size: 0.75rem;
+      color: #666;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .custom-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Kotak preview warna custom */
+    #customPreview {
+      width: 28px;
+      height: 28px;
+      border: 1px solid #999;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+
+    /* Input color native tersembunyi untuk custom */
+    #customColorInput {
+      opacity: 0;
+      width: 0;
+      height: 0;
+      position: absolute;
+    }
+
+    /* Daftar warna custom/skin */
+    .custom-swatches {
+      display: flex;
+      gap: 3px;
+    }
+
+    .custom-swatches .palette-color {
+      width: 26px;
+      height: 26px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== HTML: Struktur Konten ===== -->
+  <div class="card">
+
+    <!-- Judul aplikasi -->
+    <h1>Preferensi Warna</h1>
+
+    <!-- Fieldset dengan border abu-abu tetap -->
+    <fieldset>
+      <legend>Warna</legend>
+
+      <!-- Baris 1: Warna Latar Belakang -->
+      <div class="color-item">
+        <label>1. Warna latar belakang</label>
+        <!-- Kotak swatch diklik untuk buka modal -->
+        <div class="color-swatch" id="swatchBg" style="background-color:#c8d4e8;" onclick="bukaModal('bg')"></div>
+      </div>
+
+      <!-- Baris 2: Warna Teks -->
+      <div class="color-item">
+        <label>2. Warna teks</label>
+        <div class="color-swatch" id="swatchText" style="background-color:#cc0000;" onclick="bukaModal('text')"></div>
+      </div>
+    </fieldset>
+
+    <!-- Tombol Simpan -->
+    <button id="btnSimpan">Simpan</button>
+  </div>
+
+  <!-- ===== Modal Color Picker ===== -->
+  <div id="colorModal">
+    <!-- Header modal -->
+    <div class="modal-header">
+      <button class="btn-cancel" onclick="tutupModal()">Cancel</button>
+      <span>Choose a color</span>
+      <button class="btn-select" onclick="pilihWarna()">Select</button>
+    </div>
+
+    <!-- Grid palet warna utama -->
+    <div class="palette" id="palette"></div>
+
+    <!-- Bagian custom / skin tones -->
+    <div class="custom-section">
+      <label>Custom</label>
+      <div class="custom-row">
+        <!-- Kotak kecil kiri: membuka native color picker -->
+        <div id="customPreview" style="background:#ffffff;" onclick="document.getElementById('customColorInput').click()"></div>
+        <input type="color" id="customColorInput" value="#ffffff" oninput="ubahCustom(this.value)" />
+        <!-- Warna kulit / custom swatches -->
+        <div class="custom-swatches" id="customSwatches"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    // === Data palet warna (8 kolom × 5 baris, seperti contoh) ===
+    const paletWarna = [
+      // Baris 1: warna-warna terang
+      '#ff6666','#ffaa44','#ffee44','#aaee44','#44eeaa','#44aaee','#aa44ee','#ee44aa',
+      // Baris 2: warna dasar
+      '#cc0000','#cc6600','#cccc00','#66cc00','#00cc66','#0066cc','#6600cc','#cc0066',
+      // Baris 3: warna sedang
+      '#990000','#994400','#999900','#449900','#009944','#004499','#440099','#990044',
+      // Baris 4: warna gelap
+      '#550000','#552200','#555500','#225500','#005522','#002255','#220055','#550022',
+      // Baris 5: hitam-putih & abu
+      '#000000','#333333','#555555','#777777','#999999','#bbbbbb','#dddddd','#ffffff',
+    ];
+
+    // Warna custom/skin tones
+    const warnaCustom = ['#f5cba7','#f0b27a','#d4ac0d','#b7950b','#a04000','#784212','#5d6d7e','#1c2833'];
+
+    // === Variabel state ===
+    let targetModal   = 'bg';   // 'bg' atau 'text'
+    let selectedColor = '#ffffff';
+
+    // Warna yang tersimpan
+    let warnaBg   = '#3a6bbf';
+    let warnaText = '#cc0000';
+
+    // === Bangun grid palet warna ===
+    function buatPalet() {
+      const palette = document.getElementById('palette');
+      paletWarna.forEach(hex => {
+        const div = document.createElement('div');
+        div.className = 'palette-color';
+        div.style.backgroundColor = hex;
+        div.dataset.hex = hex;
+        div.onclick = () => pilihDariPalet(hex);
+        palette.appendChild(div);
+      });
+
+      // Bangun custom swatches
+      const customSwatches = document.getElementById('customSwatches');
+      warnaCustom.forEach(hex => {
+        const div = document.createElement('div');
+        div.className = 'palette-color';
+        div.style.backgroundColor = hex;
+        div.dataset.hex = hex;
+        div.onclick = () => pilihDariPalet(hex);
+        customSwatches.appendChild(div);
+      });
+    }
+
+    // === Tandai warna yang terpilih di grid ===
+    function tandaiPilihan(hex) {
+      document.querySelectorAll('.palette-color').forEach(el => {
+        el.classList.remove('selected');
+        if (el.dataset.hex === hex) el.classList.add('selected');
+      });
+    }
+
+    // === Klik warna dari palet ===
+    function pilihDariPalet(hex) {
+      selectedColor = hex;
+      tandaiPilihan(hex);
+      // Update custom preview juga
+      document.getElementById('customPreview').style.backgroundColor = hex;
+      document.getElementById('customColorInput').value = hex;
+    }
+
+    // === Ubah via native color input (custom) ===
+    function ubahCustom(hex) {
+      selectedColor = hex;
+      document.getElementById('customPreview').style.backgroundColor = hex;
+      tandaiPilihan(hex);
+    }
+
+    // === Buka modal picker ===
+    function bukaModal(target) {
+      targetModal = target;
+      // Set warna terpilih awal sesuai target
+      selectedColor = target === 'bg' ? warnaBg : warnaText;
+      tandaiPilihan(selectedColor);
+      document.getElementById('customPreview').style.backgroundColor = selectedColor;
+      document.getElementById('customColorInput').value = selectedColor;
+      document.getElementById('colorModal').classList.add('active');
+    }
+
+    // === Tutup modal tanpa simpan ===
+    function tutupModal() {
+      document.getElementById('colorModal').classList.remove('active');
+    }
+
+    // === Konfirmasi pilihan warna (tombol Select) ===
+    function pilihWarna() {
+      if (targetModal === 'bg') {
+        warnaBg = selectedColor;
+        document.getElementById('swatchBg').style.backgroundColor = selectedColor;
+      } else {
+        warnaText = selectedColor;
+        document.getElementById('swatchText').style.backgroundColor = selectedColor;
+      }
+      tutupModal();
+    }
+
+    // === Tombol Simpan: terapkan ke seluruh halaman ===
+    document.getElementById('btnSimpan').addEventListener('click', function () {
+      // Ubah background dan warna teks body
+      document.body.style.backgroundColor = warnaBg;
+      document.body.style.color           = warnaText;
+
+      // Sinkronkan juga warna kartu agar tetap serasi
+      document.querySelector('.card').style.backgroundColor = warnaBg;
+    });
+
+    // === Inisialisasi palet saat halaman dimuat ===
+    buatPalet();
+  </script>
+
+</body>
+</html>
