@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Program Garis Hidup Tanggal Lahir</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- jQuery (CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <!-- Data (descriptions + image sources) -->
+  <script src="data.js"></script>
+
+  <!-- App Logic -->
+  <script src="script.js"></script>
+</head>
+<body>
+
+  <!-- Background logo pattern -->
+  <div id="bg-pattern"></div>
+
+  <!-- Main wrapper -->
+  <div id="wrapper">
+
+    <!-- Header: 6-grid photo of ITENAS (3 cols × 2 rows) -->
+    <div id="header-grid"></div>
+
+    <!-- Navigation -->
+    <nav id="main-nav">
+      <a data-page="home">Home</a>
+      <a data-page="menu">Menu</a>
+      <a data-page="calculator">Calculator</a>
+      <a data-page="garishidup">Garis Hidup</a>
+    </nav>
+
+    <!-- ========================
+         PAGE: HOME (Calculator)
+    ========================= -->
+    <div class="page" id="page-home">
+      <div class="content-area">
+
+        <h2>Program Garis Hidup Tanggal Lahir</h2>
+
+        <p>
+          Program ini merupakan program untuk mendeskripsikan karakter anda berdasarkan
+          tanggal lahir yang kemudian hasilnya akan dikategorikan sebagai Garis Lahir 1 sampai 9.
+        </p>
+        <p>
+          Angka-angka dalam tanggal lahir Anda menyimpan banyak makna. Jumlahkan sampai
+          menjadi satu angka, lalu lihat artinya? (misalnya Anda lahir tanggal 25 desember 1998,
+          25 + 12 + 1998 = 2 + 5 + 1 + 2 + 1 + 9 + 9 + 8 = 36 = 3 + 6 = 9)
+        </p>
+
+        <h3 class="section-title">Ayo Cari Tahu Kepribadian Kamu !</h3>
+        <hr class="divider">
+
+        <!-- Form -->
+        <div class="form-row">
+          <label for="sel-tanggal">Masukkan Tanggal Lahir Anda</label>
+          <select id="sel-tanggal"></select>
+        </div>
+
+        <div class="form-row">
+          <label for="sel-bulan">Masukkan Bulan Lahir Anda</label>
+          <select id="sel-bulan"></select>
+        </div>
+
+        <div class="form-row">
+          <label for="sel-tahun">Masukkan Tahun Lahir Anda</label>
+          <select id="sel-tahun"></select>
+        </div>
+
+        <div class="btn-group">
+          <button id="btn-kirim">kirim</button>
+          <button id="btn-reset">reset</button>
+        </div>
+
+        <hr class="divider">
+
+        <!-- Output -->
+        <div class="output-section">
+          <h3>Output</h3>
+          <div class="output-table">
+            <div class="output-row">
+              <span class="out-label">Tanggal</span>
+              <span class="out-colon">:</span>
+              <span class="out-value" id="out-tanggal"></span>
+            </div>
+            <div class="output-row">
+              <span class="out-label">Bulan</span>
+              <span class="out-colon">:</span>
+              <span class="out-value" id="out-bulan"></span>
+            </div>
+            <div class="output-row">
+              <span class="out-label">Tahun</span>
+              <span class="out-colon">:</span>
+              <span class="out-value" id="out-tahun"></span>
+            </div>
+            <div class="output-row">
+              <span class="out-label">Hasil 1</span>
+              <span class="out-colon">:</span>
+              <span class="out-value" id="out-hasil1"></span>
+            </div>
+            <div class="output-row">
+              <span class="out-label">Hasil 2</span>
+              <span class="out-colon">:</span>
+              <span class="out-value" id="out-hasil2"></span>
+            </div>
+            <div class="output-row">
+              <span class="out-label">Hasil Akhir</span>
+              <span class="out-colon">:</span>
+              <span class="out-value" id="out-hasilakhir"></span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.content-area -->
+
+      <!-- Result Description (shown after submit) -->
+      <div id="result-section">
+        <h3 id="result-title"></h3>
+        <div id="result-text"></div>
+      </div>
+
+      <div class="footer">
+        280224<br>
+        Sistem Informasi | ITENAS 2024
+      </div>
+    </div><!-- /#page-home -->
+
+
+    <!-- ========================
+         PAGE: MENU
+    ========================= -->
+    <div class="page" id="page-menu">
+      <div class="content-area">
+        <h2>Menu</h2>
+        <p>Pilih menu yang tersedia untuk mengetahui lebih lanjut tentang program ini.</p>
+        <ul class="menu-list">
+          <li><a class="nav-link" data-page="home">Beranda / Home</a></li>
+          <li><a class="nav-link" data-page="calculator">Calculator – Hitung Garis Hidup</a></li>
+          <li><a class="nav-link" data-page="garishidup">Garis Hidup – Deskripsi Garis 1–9</a></li>
+        </ul>
+      </div>
+      <div class="footer">
+        280224<br>Sistem Informasi | ITENAS 2024
+      </div>
+    </div><!-- /#page-menu -->
+
+
+    <!-- ========================
+         PAGE: CALCULATOR
+    ========================= -->
+    <div class="page" id="page-calculator">
+      <div class="content-area">
+        <h2>Calculator</h2>
+        <p>Kalkulator ini membantu Anda memahami cara menghitung garis hidup berdasarkan tanggal lahir secara manual.</p>
+        <p>Caranya: Jumlahkan semua digit tanggal, bulan, dan tahun lahir Anda hingga menjadi satu angka tunggal antara 1 sampai 9.</p>
+
+        <div class="calc-example">
+          <strong>Contoh Perhitungan:</strong><br>
+          Tanggal lahir: <strong>25 Desember 1998</strong><br>
+          2 + 5 + 1 + 2 + 1 + 9 + 9 + 8 = <strong>37</strong><br>
+          3 + 7 = <strong>10</strong><br>
+          1 + 0 = <strong style="color:#8B0000;">1 (Garis Hidup 1)</strong>
+        </div>
+
+        <p style="margin-top:12px;">
+          Gunakan halaman <a class="nav-link" data-page="home" style="color:#330000;cursor:pointer;font-weight:bold;">Home</a>
+          untuk menghitung garis hidup Anda secara otomatis.
+        </p>
+      </div>
+      <div class="footer">
+        280224<br>Sistem Informasi | ITENAS 2024
+      </div>
+    </div><!-- /#page-calculator -->
+
+
+    <!-- ========================
+         PAGE: GARIS HIDUP
+    ========================= -->
+    <div class="page" id="page-garishidup">
+      <div class="content-area">
+        <h2>Garis Hidup</h2>
+        <p>Berikut adalah deskripsi singkat untuk setiap Garis Hidup dari 1 sampai 9:</p>
+        <hr class="divider">
+        <div id="gh-list"></div>
+      </div>
+      <div class="footer">
+        280224<br>Sistem Informasi | ITENAS 2024
+      </div>
+    </div><!-- /#page-garishidup -->
+
+  </div><!-- /#wrapper -->
+
+</body>
+</html>
