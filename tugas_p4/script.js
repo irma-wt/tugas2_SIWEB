@@ -54,7 +54,7 @@ $(document).ready(function () {
       $bln.append($("<option>").val(i + 1).text(name));
     });
 
-    // Tahun 1950–2010
+    // Tahun 1950–2026
     var $thn = $("#sel-tahun");
     for (var y = 1950; y <= 2026; y++) {
       $thn.append($("<option>").val(y).text(y));
