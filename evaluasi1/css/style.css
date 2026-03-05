@@ -1,0 +1,320 @@
+/* ===== RESET ===== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ===== BODY: background pola logo ITENAS ===== */
+body {
+  background-color: #fff;
+  background-image: url('../assets/logo itenas.jpg');
+  background-repeat: repeat;
+  background-size: 80px 80px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 20px 0;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+}
+
+/* ===== WRAPPER TENGAH ===== */
+#wrapper {
+  width: 490px;
+  border: 3px solid #8b3a3a;
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== BANNER ===== */
+#banner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 85px);
+  width: 100%;
+}
+
+.banner-cell {
+  overflow: hidden;
+  border: 1px solid #555;
+}
+
+.banner-cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ===== BODY AREA ===== */
+#body-area {
+  display: flex;
+  background: #f0a500;
+  min-height: 90px;
+}
+
+/* ===== SIDEBAR NAV ===== */
+#sidebar {
+  width: 90px;
+  min-width: 90px;
+  background: #f0a500;
+  display: flex;
+  flex-direction: column;
+  padding: 6px 4px;
+  border-right: 1px solid #b8860b;
+  gap: 0;
+}
+
+.nav-link {
+  display: block;
+  color: #000;
+  text-decoration: none;
+  font-size: 12px;
+  padding: 5px 8px;
+  background: #f0a500;
+  text-align: left;
+  border-bottom: 1px solid #b8860b;
+}
+
+.nav-link:first-child {
+  border-top: 1px solid #b8860b;
+}
+
+.nav-link:hover,
+.nav-link.active-link {
+  background: #d4900a;
+}
+
+/* ===== CONTENT AREA ===== */
+#content-area {
+  flex: 1;
+  padding: 6px 8px;
+  background: #f0a500;
+}
+
+/* ===== PAGES ===== */
+.page { display: none; }
+.page.active-page { display: block; }
+
+/* ===== HOME PAGE ===== */
+.home-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0;
+}
+
+.home-label {
+  font-size: 12px;
+  color: #000;
+}
+
+#btn-shout {
+  background: #111;
+  color: #fff;
+  border: none;
+  padding: 2px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+#btn-shout:hover { background: #333; }
+
+/* ===== CUSTOM ALERT OVERLAY ===== */
+#custom-alert-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(30,30,30,0.7);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+
+#custom-alert-overlay.show {
+  display: flex;
+}
+
+#custom-alert-box {
+  background: #3a3a3a;
+  color: #fff;
+  border-radius: 6px;
+  padding: 20px 24px;
+  min-width: 280px;
+  max-width: 360px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+  font-size: 13px;
+}
+
+#custom-alert-msg {
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+#custom-alert-btn {
+  display: block;
+  margin-left: auto;
+  background: #00bcd4;
+  color: #fff;
+  border: none;
+  padding: 4px 18px;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+#custom-alert-btn:hover { background: #0097a7; }
+
+/* ===== MENU TABLE ===== */
+#menu-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+  table-layout: fixed;
+}
+
+#menu-table col.col-no    { width: 22px; }
+#menu-table col.col-nama  { width: 100px; }
+#menu-table col.col-harga { width: 72px; }
+#menu-table col.col-pesan { width: 80px; }
+#menu-table col.col-reset { width: 60px; }
+
+#menu-table th,
+#menu-table td {
+  border: 1px solid #b8860b;
+  padding: 2px 4px;
+  text-align: left;
+  background: #f5c518;
+  overflow: hidden;
+}
+
+/* kolom ke-5 (Reset): tanpa border dan background kecuali di baris ke-3 */
+#menu-table thead th:last-child,
+#menu-table tbody tr:not(:last-child) td:last-child,
+#menu-table tfoot td:last-child {
+  background: transparent;
+  border: none;
+}
+
+#menu-table thead tr th {
+  background: #f5c518;
+  color: #000;
+  font-weight: bold;
+}
+
+/* kolom ke-5 header tetap tanpa bg */
+#menu-table thead th:last-child {
+  background: transparent;
+  border: none;
+}
+
+.lbl {
+  text-align: right;
+  background: #f5c518;
+}
+
+/* input Pesan & result box: putih, lebar penuh kolom */
+.qty-input {
+  width: 100%;
+  padding: 1px 3px;
+  font-size: 11px;
+  border: 1px solid #888;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.result-box {
+  width: 100%;
+  padding: 1px 3px;
+  font-size: 11px;
+  border: 1px solid #888;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+/* tombol Reset di kolom ke-5 baris terakhir */
+#btn-reset-menu {
+  background: #111;
+  color: #f5c518;
+  border: none;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+  width: 100%;
+}
+
+#btn-reset-menu:hover { background: #333; }
+
+/* ===== CALCULATOR ===== */
+.calc-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 0;
+}
+
+#calc-num1,
+#calc-num2,
+#calc-result {
+  width: 55px;
+  padding: 2px 3px;
+  font-size: 12px;
+  border: 1px solid #888;
+  background: #fff;
+}
+
+#calc-op {
+  padding: 2px 2px;
+  font-size: 12px;
+  border: 1px solid #888;
+  background: #fff;
+  width: 36px;
+}
+
+.calc-row span {
+  font-size: 13px;
+  font-weight: bold;
+  color: #000;
+}
+
+.calc-btns {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+#btn-hitung {
+  background: #111;
+  color: #f5c518;
+  border: none;
+  padding: 3px 14px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#btn-hitung:hover { background: #333; }
+
+#btn-reset-calc {
+  background: #111;
+  color: #f5c518;
+  border: none;
+  padding: 3px 14px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#btn-reset-calc:hover { background: #333; }
+
+/* ===== FOOTER ===== */
+#footer {
+  background: #f0a500;
+  text-align: center;
+  padding: 5px 0;
+  font-size: 11px;
+  color: #000;
+  border-top: 1px solid #b8860b;
+}

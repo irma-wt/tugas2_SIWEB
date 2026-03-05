@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sistem Sederhana</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+
+  <!-- WRAPPER TENGAH -->
+  <div id="wrapper">
+
+    <!-- BANNER FOTO 3x2 -->
+    <div id="banner">
+      <div class="banner-cell"><img src="assets/itenas.jpg" alt="ITENAS"/></div>
+      <div class="banner-cell"><img src="assets/itenas.jpg" alt="ITENAS"/></div>
+      <div class="banner-cell"><img src="assets/itenas.jpg" alt="ITENAS"/></div>
+      <div class="banner-cell"><img src="assets/itenas.jpg" alt="ITENAS"/></div>
+      <div class="banner-cell"><img src="assets/itenas.jpg" alt="ITENAS"/></div>
+      <div class="banner-cell"><img src="assets/itenas.jpg" alt="ITENAS"/></div>
+    </div>
+
+    <!-- BODY: NAV KIRI + KONTEN KANAN -->
+    <div id="body-area">
+
+      <nav id="sidebar">
+        <a href="#" id="btn-home" class="nav-link">Home</a>
+        <a href="#" id="btn-menu" class="nav-link">Menu</a>
+        <a href="#" id="btn-calculator" class="nav-link">Calculator</a>
+      </nav>
+
+      <div id="content-area">
+
+        <!-- PAGE HOME -->
+        <div id="page-home" class="page active-page">
+          <div class="home-row">
+            <span class="home-label">klik button disampling &gt;&gt;</span>
+            <button id="btn-shout">Shout</button>
+          </div>
+        </div>
+
+        <!-- PAGE MENU -->
+        <div id="page-menu" class="page">
+          <table id="menu-table">
+            <colgroup>
+              <col class="col-no"/><col class="col-nama"/><col class="col-harga"/><col class="col-pesan"/><col class="col-reset"/>
+            </colgroup>
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Makanan/Minuman</th>
+                <th>Harga</th>
+                <th>Pesan</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Bakso Istimewa</td>
+                <td>@ Rp 12000</td>
+                <td><input type="number" class="qty-input" data-price="12000" min="0" value="0"/></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Soto Spesial</td>
+                <td>@ Rp 10000</td>
+                <td><input type="number" class="qty-input" data-price="10000" min="0" value="0"/></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Mie Ayam Super</td>
+                <td>@ Rp 15000</td>
+                <td><input type="number" class="qty-input" data-price="15000" min="0" value="0"/></td>
+                <td><button id="btn-reset-menu">Reset</button></td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3" class="lbl">Jumlah Total</td>
+                <td><input type="text" class="result-box" id="jumlah-total" readonly value="0"/></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td colspan="3" class="lbl">Diskon</td>
+                <td><input type="text" class="result-box" id="diskon" readonly value="0"/></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td colspan="3" class="lbl">Jumlah Bayar</td>
+                <td><input type="text" class="result-box" id="jumlah-bayar" readonly value="0"/></td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <!-- PAGE CALCULATOR -->
+        <div id="page-calculator" class="page">
+          <div class="calc-row">
+            <input type="number" id="calc-num1"/>
+            <select id="calc-op">
+              <option value="*">*</option>
+              <option value="/">/</option>
+              <option value="+">+</option>
+              <option value="-">-</option>
+              <option value="%">%</option>
+              <option value="^">^</option>
+            </select>
+            <input type="number" id="calc-num2"/>
+            <span>=</span>
+            <input type="text" id="calc-result" readonly/>
+          </div>
+          <div class="calc-btns">
+            <button id="btn-hitung">Hitung</button>
+            <button id="btn-reset-calc">Reset</button>
+          </div>
+        </div>
+
+      </div><!-- end content-area -->
+    </div><!-- end body-area -->
+
+    <!-- FOOTER -->
+    <div id="footer">
+      280224<br/>Sistem Informasi | ITENAS 2024
+    </div>
+
+  </div><!-- end wrapper -->
+
+  <!-- CUSTOM ALERT -->
+  <div id="custom-alert-overlay">
+    <div id="custom-alert-box">
+      <div id="custom-alert-msg"></div>
+      <button id="custom-alert-btn">OK</button>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
